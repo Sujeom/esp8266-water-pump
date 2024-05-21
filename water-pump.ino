@@ -3,9 +3,7 @@
 #include <EEPROM.h>
 
 unsigned long previousMillis = 0;
-const unsigned long interval = 1 * 60 * 60 * 1000; //  1 hour
-// const unsigned long interval = 1 * 60 * 60 * 1000; //  30 minutes
-// const unsigned long interval = 10000; // 3 seconds
+const unsigned long interval = 30 * 60 * 1000; //  30 minutes
 const int switchGpioPin = 16;
 const int waterGpioPin = 5;
 const int waterGpioPinSwitchV = 14;
@@ -38,9 +36,6 @@ void loop() {
   server.handleClient();
 
   // Check if the specified interval has elapsed
-
-  // unsigned long currentMillis = millis();
-  // if (currentMillis - previousMillis >= interval) {
     Serial.println("Turning on water sensor");
     digitalWrite(waterGpioPinSwitchV, HIGH);
     digitalWrite(waterGpioPinSwitchG, HIGH);
@@ -64,8 +59,5 @@ void loop() {
       Serial.println("Turning off water sensor");
       digitalWrite(waterGpioPinSwitchV, LOW);
       digitalWrite(waterGpioPinSwitchG, LOW);
-    // Reset the timer
-  //   previousMillis = currentMillis;
-  // }
   delay(interval);
 }
